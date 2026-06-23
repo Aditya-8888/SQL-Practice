@@ -1,7 +1,5 @@
 # SQL-Practice
 
-# SQL Practice
-
 Welcome to my SQL Practice Repository!
 
 This repository contains my daily SQL learning journey, practice queries, and interview preparation exercises.
