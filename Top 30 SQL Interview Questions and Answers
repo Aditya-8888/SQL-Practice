@@ -1,0 +1,1241 @@
+Top 30 SQL Interview Questions (1–10) – Detailed Answers
+
+1. What is SQL?
+
+### Answer
+
+SQL (Structured Query Language) is a standard programming language used to communicate with relational databases. It allows users to create databases, store data, retrieve information, update records, delete records, and control database access.
+
+SQL was developed by IBM in the 1970s and later became an ANSI and ISO standard.
+
+### Why SQL is Important?
+
+* Store data efficiently
+* Retrieve required information quickly
+* Maintain data consistency
+* Used in almost every software application
+* Essential skill for Data Analysts, Data Scientists, Software Engineers, and Database Administrators
+
+### Example
+
+```sql
+SELECT * FROM Employees;
+```
+
+### Common SQL Commands
+
+* SELECT
+* INSERT
+* UPDATE
+* DELETE
+* CREATE
+* ALTER
+* DROP
+* TRUNCATE
+
+### Interview Follow-up Questions
+
+* Is SQL a programming language?
+* Which databases use SQL?
+* Difference between SQL and MySQL?
+
+---
+
+# 2. Difference between DBMS and RDBMS
+
+## Answer
+
+A DBMS (Database Management System) is software used to store and manage data.
+
+An RDBMS (Relational Database Management System) stores data in related tables and maintains relationships using keys.
+
+### Differences
+
+| DBMS                                  | RDBMS                                |
+| ------------------------------------- | ------------------------------------ |
+| Stores data as files or simple tables | Stores data in related tables        |
+| Relationships are not mandatory       | Relationships are maintained         |
+| Less secure                           | More secure                          |
+| Doesn't always support normalization  | Supports normalization               |
+| Suitable for small applications       | Suitable for enterprise applications |
+
+### Examples
+
+DBMS
+
+* File System
+
+RDBMS
+
+* MySQL
+* PostgreSQL
+* Oracle
+* SQL Server
+
+### Interview Tip
+
+Every RDBMS is a DBMS, but every DBMS is not an RDBMS.
+
+---
+
+# 3. Explain DDL, DML, DQL, DCL and TCL
+
+## Answer
+
+SQL commands are divided into five categories.
+
+### 1. DDL (Data Definition Language)
+
+Used to define database structure.
+
+Commands
+
+* CREATE
+* ALTER
+* DROP
+* TRUNCATE
+* RENAME
+
+Example
+
+```sql
+CREATE TABLE Employees
+(
+    EmpID INT,
+    Name VARCHAR(50)
+);
+```
+
+---
+
+### 2. DML (Data Manipulation Language)
+
+Used to manipulate data.
+
+Commands
+
+* INSERT
+* UPDATE
+* DELETE
+
+Example
+
+```sql
+INSERT INTO Employees
+VALUES (1,'Aditya');
+```
+
+---
+
+### 3. DQL (Data Query Language)
+
+Used to retrieve data.
+
+Command
+
+```sql
+SELECT * FROM Employees;
+```
+
+---
+
+### 4. DCL (Data Control Language)
+
+Controls database permissions.
+
+Commands
+
+* GRANT
+* REVOKE
+
+---
+
+### 5. TCL (Transaction Control Language)
+
+Controls transactions.
+
+Commands
+
+* COMMIT
+* ROLLBACK
+* SAVEPOINT
+
+---
+
+# 4. Difference between DELETE, TRUNCATE and DROP
+
+| DELETE                                            | TRUNCATE                 | DROP                                    |
+| ------------------------------------------------- | ------------------------ | --------------------------------------- |
+| Removes selected rows                             | Removes all rows         | Removes entire table                    |
+| WHERE clause supported                            | WHERE not supported      | WHERE not supported                     |
+| Can rollback (inside a transaction in many DBMSs) | Rollback depends on DBMS | Generally cannot recover without backup |
+| Table structure remains                           | Table structure remains  | Table structure deleted                 |
+| Slower                                            | Faster                   | Fastest                                 |
+
+### Example
+
+DELETE
+
+```sql
+DELETE FROM Employees
+WHERE Salary < 20000;
+```
+
+TRUNCATE
+
+```sql
+TRUNCATE TABLE Employees;
+```
+
+DROP
+
+```sql
+DROP TABLE Employees;
+```
+
+### Interview Tip
+
+This is one of the most frequently asked SQL questions.
+
+---
+
+# 5. Difference between WHERE and HAVING
+
+## WHERE
+
+Filters individual rows before grouping.
+
+Example
+
+```sql
+SELECT *
+FROM Employees
+WHERE Salary > 50000;
+```
+
+---
+
+## HAVING
+
+Filters grouped data after GROUP BY.
+
+Example
+
+```sql
+SELECT Department,
+COUNT(*)
+FROM Employees
+GROUP BY Department
+HAVING COUNT(*) > 5;
+```
+
+### Comparison
+
+| WHERE                                    | HAVING                       |
+| ---------------------------------------- | ---------------------------- |
+| Filters rows                             | Filters groups               |
+| Used before GROUP BY                     | Used after GROUP BY          |
+| Cannot directly filter aggregate results | Can filter aggregate results |
+
+---
+
+# 6. Difference between Primary Key and Foreign Key
+
+## Primary Key
+
+A Primary Key uniquely identifies every row in a table.
+
+Characteristics
+
+* Unique
+* Cannot be NULL
+* One primary key per table
+
+Example
+
+```sql
+EmpID INT PRIMARY KEY
+```
+
+---
+
+## Foreign Key
+
+A Foreign Key creates a relationship between two tables.
+
+Example
+
+```sql
+DepartmentID INT,
+FOREIGN KEY (DepartmentID)
+REFERENCES Department(DepartmentID);
+```
+
+### Comparison
+
+| Primary Key        | Foreign Key                            |
+| ------------------ | -------------------------------------- |
+| Unique             | May contain duplicate values           |
+| Cannot be NULL     | Can contain NULL (depending on design) |
+| Identifies records | Creates relationships                  |
+
+---
+
+# 7. Difference between Primary Key and Unique Key
+
+| Primary Key                | Unique Key                              |
+| -------------------------- | --------------------------------------- |
+| Cannot contain NULL values | Usually allows one NULL (DBMS-specific) |
+| Only one per table         | Multiple unique keys allowed            |
+| Used for identification    | Used to enforce uniqueness              |
+
+### Interview Tip
+
+Every Primary Key is unique, but not every Unique Key is a Primary Key.
+
+---
+
+# 8. Explain all SQL JOINs with examples
+
+A JOIN combines rows from two or more tables based on a related column.
+
+## Types of JOINs
+
+### INNER JOIN
+
+Returns only matching rows.
+
+```sql
+SELECT *
+FROM Employees E
+INNER JOIN Department D
+ON E.DepartmentID = D.DepartmentID;
+```
+
+---
+
+### LEFT JOIN
+
+Returns all rows from the left table and matching rows from the right table.
+
+```sql
+SELECT *
+FROM Employees E
+LEFT JOIN Department D
+ON E.DepartmentID = D.DepartmentID;
+```
+
+---
+
+### RIGHT JOIN
+
+Returns all rows from the right table.
+
+```sql
+SELECT *
+FROM Employees E
+RIGHT JOIN Department D
+ON E.DepartmentID = D.DepartmentID;
+```
+
+---
+
+### FULL OUTER JOIN
+
+Returns all rows from both tables.
+
+```sql
+SELECT *
+FROM Employees E
+FULL OUTER JOIN Department D
+ON E.DepartmentID = D.DepartmentID;
+```
+
+---
+
+### CROSS JOIN
+
+Returns every possible combination of rows.
+
+```sql
+SELECT *
+FROM Employees
+CROSS JOIN Department;
+```
+
+---
+
+### SELF JOIN
+
+Joins a table with itself.
+
+```sql
+SELECT A.Name AS Employee,
+B.Name AS Manager
+FROM Employees A
+JOIN Employees B
+ON A.ManagerID = B.EmpID;
+```
+
+---
+
+# 9. What is GROUP BY?
+
+## Answer
+
+GROUP BY groups rows that have the same values into summary groups.
+
+It is mainly used with aggregate functions.
+
+### Aggregate Functions
+
+* COUNT()
+* SUM()
+* AVG()
+* MIN()
+* MAX()
+
+Example
+
+```sql
+SELECT Department,
+AVG(Salary)
+FROM Employees
+GROUP BY Department;
+```
+
+### Interview Tip
+
+Remember:
+
+WHERE → Filters rows
+
+GROUP BY → Creates groups
+
+HAVING → Filters groups
+
+---
+
+# 10. What are Aggregate Functions?
+
+## Answer
+
+Aggregate Functions perform calculations on multiple rows and return a single value.
+
+### Types
+
+COUNT()
+
+Counts rows.
+
+```sql
+SELECT COUNT(*)
+FROM Employees;
+```
+
+---
+
+SUM()
+
+Returns total.
+
+```sql
+SELECT SUM(Salary)
+FROM Employees;
+```
+
+---
+
+AVG()
+
+Returns average.
+
+```sql
+SELECT AVG(Salary)
+FROM Employees;
+```
+
+---
+
+MIN()
+
+Returns minimum value.
+
+```sql
+SELECT MIN(Salary)
+FROM Employees;
+```
+
+---
+
+MAX()
+
+Returns maximum value.
+
+```sql
+SELECT MAX(Salary)
+FROM Employees;
+```
+
+---
+
+## Frequently Asked Follow-up Questions
+
+* Can aggregate functions ignore NULL values?
+* Can aggregate functions be used without GROUP BY?
+* Difference between COUNT(*) and COUNT(column)?
+* Can HAVING be used without GROUP BY?
+
+---
+
+# ⭐ Revision Tips
+
+Before an interview, make sure you can confidently explain:
+
+* What SQL is and why it is used.
+* DBMS vs RDBMS.
+* DDL, DML, DQL, DCL, and TCL.
+* DELETE vs TRUNCATE vs DROP.
+* WHERE vs HAVING.
+* Primary Key vs Foreign Key.
+* Primary Key vs Unique Key.
+* All SQL JOINs.
+* GROUP BY.
+* Aggregate Functions.
+
+These topics are among the most frequently asked in SQL interviews for freshers and are excellent fundamentals for Data Analyst, Business Intelligence, and Software Engineering roles.
+
+
+# Top 30 SQL Interview Questions (11–20) – Detailed Answers
+
+## 11. What is a Subquery?
+
+### Answer
+
+A **Subquery** (also called an **Inner Query** or **Nested Query**) is a query written inside another SQL query. It is enclosed within parentheses `()` and its result is used by the outer query.
+
+A subquery can be used with:
+
+* SELECT
+* INSERT
+* UPDATE
+* DELETE
+
+### Syntax
+
+```sql
+SELECT column_name
+FROM table_name
+WHERE column_name =
+(
+    SELECT column_name
+    FROM table_name
+);
+```
+
+### Example
+
+Find employees earning more than the average salary.
+
+```sql
+SELECT Name, Salary
+FROM Employees
+WHERE Salary >
+(
+    SELECT AVG(Salary)
+    FROM Employees
+);
+```
+
+### Advantages
+
+* Makes complex queries simpler.
+* Improves readability.
+* Avoids writing multiple queries.
+* Useful for filtering and calculations.
+
+---
+
+# 12. Difference between Subquery and JOIN
+
+## Answer
+
+Both are used to retrieve data from multiple tables but they work differently.
+
+| Subquery                               | JOIN                               |
+| -------------------------------------- | ---------------------------------- |
+| Query inside another query             | Combines two or more tables        |
+| Can be slower for large datasets       | Usually faster                     |
+| Easier for simple filtering            | Better for retrieving related data |
+| Used when one query depends on another | Used to combine records            |
+
+### Example of JOIN
+
+```sql
+SELECT E.Name,
+       D.DepartmentName
+FROM Employees E
+INNER JOIN Department D
+ON E.DepartmentID = D.DepartmentID;
+```
+
+### Interview Tip
+
+Use **JOIN** when combining related tables.
+
+Use **Subquery** when one query depends on the result of another.
+
+---
+
+# 13. Difference between UNION and UNION ALL
+
+## Answer
+
+Both combine the results of multiple SELECT statements.
+
+### UNION
+
+* Removes duplicate rows.
+* Performs sorting to remove duplicates.
+* Slower.
+
+Example
+
+```sql
+SELECT City FROM Customers
+UNION
+SELECT City FROM Suppliers;
+```
+
+---
+
+### UNION ALL
+
+* Keeps duplicate rows.
+* Faster.
+* No duplicate removal.
+
+Example
+
+```sql
+SELECT City FROM Customers
+UNION ALL
+SELECT City FROM Suppliers;
+```
+
+### Comparison
+
+| UNION                    | UNION ALL        |
+| ------------------------ | ---------------- |
+| Removes duplicates       | Keeps duplicates |
+| Slower                   | Faster           |
+| Uses DISTINCT internally | No DISTINCT      |
+
+---
+
+# 14. What is a View?
+
+## Answer
+
+A **View** is a virtual table created using a SELECT statement.
+
+A view stores the SQL query, not the actual data.
+
+### Syntax
+
+```sql
+CREATE VIEW EmployeeView AS
+SELECT Name, Salary
+FROM Employees;
+```
+
+### Advantages
+
+* Improves security.
+* Simplifies complex queries.
+* Reusable.
+* Hides sensitive columns.
+
+### Disadvantages
+
+* Some views cannot be updated.
+* Performance may decrease for very complex views.
+
+---
+
+# 15. What is an Index?
+
+## Answer
+
+An **Index** is a database object that improves the speed of retrieving records.
+
+Think of it like the index of a book—it helps the database find data faster without scanning every row.
+
+### Advantages
+
+* Faster SELECT queries.
+* Faster searching.
+* Better query performance.
+
+### Disadvantages
+
+* Uses additional storage.
+* Slows INSERT, UPDATE and DELETE operations because the index must also be updated.
+
+### Syntax
+
+```sql
+CREATE INDEX idx_salary
+ON Employees(Salary);
+```
+
+---
+
+## Clustered Index
+
+A Clustered Index stores the actual table data in sorted order.
+
+### Characteristics
+
+* Only one clustered index per table.
+* Faster range searches.
+* Data is physically ordered.
+
+---
+
+## Non-Clustered Index
+
+A Non-Clustered Index stores pointers to the actual data.
+
+### Characteristics
+
+* Multiple non-clustered indexes allowed.
+* Does not change the physical order of the table.
+
+---
+
+# 16. Find the Second Highest Salary
+
+### Using Subquery
+
+```sql
+SELECT MAX(Salary)
+FROM Employees
+WHERE Salary <
+(
+SELECT MAX(Salary)
+FROM Employees
+);
+```
+
+### Using DENSE_RANK()
+
+```sql
+SELECT Salary
+FROM
+(
+SELECT Salary,
+DENSE_RANK() OVER(ORDER BY Salary DESC) AS RankNo
+FROM Employees
+) A
+WHERE RankNo = 2;
+```
+
+### Interview Tip
+
+This is one of the most commonly asked SQL practical questions.
+
+---
+
+# 17. Find the Nth Highest Salary
+
+### Using DENSE_RANK()
+
+```sql
+SELECT Salary
+FROM
+(
+SELECT Salary,
+DENSE_RANK() OVER(ORDER BY Salary DESC) RankNo
+FROM Employees
+) A
+WHERE RankNo = N;
+```
+
+Replace **N** with any value such as 3, 4, or 5.
+
+---
+
+# 18. Find Duplicate Records
+
+Suppose Email should be unique.
+
+```sql
+SELECT Email,
+COUNT(*)
+FROM Employees
+GROUP BY Email
+HAVING COUNT(*) > 1;
+```
+
+### Explanation
+
+* GROUP BY creates groups.
+* COUNT counts rows.
+* HAVING filters groups having more than one record.
+
+---
+
+# 19. Delete Duplicate Records
+
+Using ROW_NUMBER()
+
+```sql
+WITH DuplicateRecords AS
+(
+SELECT *,
+ROW_NUMBER() OVER
+(
+PARTITION BY Email
+ORDER BY EmployeeID
+) AS RowNum
+FROM Employees
+)
+
+DELETE
+FROM DuplicateRecords
+WHERE RowNum > 1;
+```
+
+### Interview Tip
+
+Interviewers often ask:
+"How would you delete duplicates while keeping one copy?"
+
+The ROW_NUMBER() approach is the preferred answer.
+
+---
+
+# 20. Find Employees with Salary Greater than Average Salary
+
+### Query
+
+```sql
+SELECT Name,
+Salary
+FROM Employees
+WHERE Salary >
+(
+SELECT AVG(Salary)
+FROM Employees
+);
+```
+
+### Explanation
+
+1. Calculate the average salary.
+2. Compare each employee's salary with the average.
+3. Return only employees earning above average.
+
+---
+
+# ⭐ Interview Tips
+
+These are among the highest-frequency SQL interview questions:
+
+✅ Subquery
+
+✅ JOIN vs Subquery
+
+✅ UNION vs UNION ALL
+
+✅ Views
+
+✅ Indexes
+
+✅ Clustered vs Non-Clustered Index
+
+✅ Second Highest Salary
+
+✅ Nth Highest Salary
+
+✅ Find Duplicate Records
+
+✅ Delete Duplicate Records
+
+Practice writing these queries without looking at notes. Interviewers often ask you to explain why your solution works, so understanding the logic is just as important as remembering the syntax.
+
+
+
+# Top 30 SQL Interview Questions (21–30) – Detailed Answers
+
+## 21. Find the Highest Salary in Each Department
+
+### Answer
+
+This is one of the most frequently asked SQL interview questions.
+
+### Method 1: Using GROUP BY
+
+```sql
+SELECT DepartmentID,
+       MAX(Salary) AS HighestSalary
+FROM Employees
+GROUP BY DepartmentID;
+```
+
+### Method 2: Display Employee Name with Highest Salary
+
+```sql
+SELECT E.*
+FROM Employees E
+WHERE Salary =
+(
+    SELECT MAX(Salary)
+    FROM Employees
+    WHERE DepartmentID = E.DepartmentID
+);
+```
+
+### Explanation
+
+* `MAX()` returns the highest salary.
+* `GROUP BY` creates one group for each department.
+* The correlated subquery returns the employee(s) with the highest salary in each department.
+
+---
+
+# 22. Find Departments Having More Than 5 Employees
+
+### Answer
+
+```sql
+SELECT DepartmentID,
+       COUNT(*) AS TotalEmployees
+FROM Employees
+GROUP BY DepartmentID
+HAVING COUNT(*) > 5;
+```
+
+### Explanation
+
+* `GROUP BY` groups employees by department.
+* `COUNT(*)` counts employees.
+* `HAVING` filters grouped results.
+
+### Interview Follow-up
+
+**Why can't we use WHERE here?**
+
+Because `COUNT(*)` is an aggregate function, so we must use **HAVING**.
+
+---
+
+# 23. Find Employees Who Do Not Have a Department
+
+### Answer
+
+### Method 1
+
+```sql
+SELECT *
+FROM Employees
+WHERE DepartmentID IS NULL;
+```
+
+### Method 2
+
+```sql
+SELECT E.*
+FROM Employees E
+LEFT JOIN Departments D
+ON E.DepartmentID = D.DepartmentID
+WHERE D.DepartmentID IS NULL;
+```
+
+### Explanation
+
+* `LEFT JOIN` returns all employees.
+* Employees without matching departments have NULL values.
+
+---
+
+# 24. Find Employees Working in More Than One Department
+
+### Answer
+
+Suppose an employee can appear multiple times in an EmployeeDepartment table.
+
+```sql
+SELECT EmployeeID,
+       COUNT(DepartmentID)
+FROM EmployeeDepartment
+GROUP BY EmployeeID
+HAVING COUNT(DepartmentID) > 1;
+```
+
+### Explanation
+
+* Group by employee.
+* Count departments.
+* Show only employees working in multiple departments.
+
+---
+
+# 25. Find the Top 3 Highest Salaries
+
+### Method 1
+
+```sql
+SELECT DISTINCT Salary
+FROM Employees
+ORDER BY Salary DESC
+LIMIT 3;
+```
+
+### SQL Server Version
+
+```sql
+SELECT TOP 3 Salary
+FROM Employees
+ORDER BY Salary DESC;
+```
+
+### Using DENSE_RANK()
+
+```sql
+SELECT Salary
+FROM
+(
+SELECT Salary,
+DENSE_RANK() OVER(ORDER BY Salary DESC) AS RankNo
+FROM Employees
+) A
+WHERE RankNo <= 3;
+```
+
+### Interview Tip
+
+Many interviewers prefer the **DENSE_RANK()** solution because it correctly handles duplicate salaries.
+
+---
+
+# 26. Difference between ROW_NUMBER(), RANK() and DENSE_RANK()
+
+### ROW_NUMBER()
+
+Assigns a unique number to every row.
+
+Example
+
+```
+10000 → 1
+9000  → 2
+9000  → 3
+8000  → 4
+```
+
+---
+
+### RANK()
+
+Rows with the same value receive the same rank, and the next rank is skipped.
+
+Example
+
+```
+10000 → 1
+9000  → 2
+9000  → 2
+8000  → 4
+```
+
+---
+
+### DENSE_RANK()
+
+Rows with the same value receive the same rank, but the next rank is not skipped.
+
+Example
+
+```
+10000 → 1
+9000  → 2
+9000  → 2
+8000  → 3
+```
+
+### Comparison
+
+| ROW_NUMBER()   | RANK()      | DENSE_RANK()     |
+| -------------- | ----------- | ---------------- |
+| Unique numbers | Skips ranks | No skipped ranks |
+
+---
+
+# 27. Write a Query using CASE WHEN
+
+### Answer
+
+CASE works like an IF-ELSE statement.
+
+```sql
+SELECT Name,
+Salary,
+CASE
+WHEN Salary > 80000 THEN 'High Salary'
+WHEN Salary BETWEEN 50000 AND 80000 THEN 'Medium Salary'
+ELSE 'Low Salary'
+END AS SalaryCategory
+FROM Employees;
+```
+
+### Uses
+
+* Data classification
+* Conditional calculations
+* Replacing IF-ELSE logic
+
+---
+
+# 28. Explain CTE (Common Table Expression)
+
+### Answer
+
+A CTE is a temporary named result set used within a query.
+
+### Syntax
+
+```sql
+WITH EmployeeCTE AS
+(
+SELECT *
+FROM Employees
+)
+SELECT *
+FROM EmployeeCTE;
+```
+
+### Advantages
+
+* Improves readability.
+* Simplifies complex queries.
+* Can replace nested subqueries.
+* Supports recursive queries.
+
+---
+
+# 29. Explain ACID Properties
+
+### Answer
+
+ACID ensures database transactions are reliable.
+
+### A — Atomicity
+
+A transaction is completed entirely or not at all.
+
+Example
+
+If money is transferred from Account A to Account B, both operations must succeed or both must fail.
+
+---
+
+### C — Consistency
+
+The database remains valid before and after the transaction.
+
+---
+
+### I — Isolation
+
+Multiple transactions should not interfere with one another.
+
+---
+
+### D — Durability
+
+Once a transaction is committed, the changes are permanent even if the system crashes.
+
+### Interview Tip
+
+Almost every SQL interview asks about ACID properties.
+
+---
+
+# 30. What is SQL Injection? How can it be prevented?
+
+### Answer
+
+SQL Injection is a security attack where an attacker inserts malicious SQL code into user input to manipulate the database.
+
+### Example (Unsafe)
+
+```sql
+SELECT *
+FROM Users
+WHERE Username = 'admin'
+AND Password = '123';
+```
+
+If user input is not validated, an attacker may inject SQL that changes the intended query.
+
+### Prevention
+
+* Use Prepared Statements (Parameterized Queries).
+* Validate and sanitize user input.
+* Use stored procedures where appropriate.
+* Apply the principle of least privilege.
+* Avoid building SQL with string concatenation.
+
+### Advantages of Prevention
+
+* Protects sensitive data.
+* Prevents unauthorized access.
+* Improves application security.
+
+---
+
+# ⭐ Final Interview Checklist
+
+## Theory
+
+* SQL Basics
+* DBMS vs RDBMS
+* SQL Commands
+* Keys & Constraints
+* WHERE vs HAVING
+* GROUP BY
+* JOINS
+* Views
+* Indexes
+* Normalization
+* CTE
+* ACID
+* SQL Injection
+
+## Practical
+
+* Second Highest Salary
+* Nth Highest Salary
+* Top 3 Highest Salaries
+* Highest Salary in Each Department
+* Duplicate Records
+* Delete Duplicate Records
+* GROUP BY & HAVING
+* CASE WHEN
+* JOIN Queries
+* Subqueries
+
+---
+
+# 💡 Final Advice
+
+If you're preparing for **Data Analyst**, **Business Intelligence**, **SQL Developer**, or **CDAC DBDA** interviews, make sure you can:
+
+* Explain every concept in your own words.
+* Write SQL queries without referring to notes.
+* Compare similar concepts (e.g., `WHERE` vs `HAVING`, `UNION` vs `UNION ALL`, `RANK()` vs `DENSE_RANK()`).
+* Describe when you would use each feature in a real-world scenario.
+
+These 30 questions cover many of the concepts that appear repeatedly in fresher SQL interviews and provide a strong foundation for technical rounds.
