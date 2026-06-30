@@ -34,10 +34,4 @@ To strengthen my SQL skills for:
 | Day 04 | JOINS               |
 | Day 05 | Subqueries          |
 
-## Author
-
-Aditya Patil
-
-Computer Science Graduate | Data Analytics Enthusiast
-
-Skills: SQL, Python, Power BI, Excel, Machine Learning
+* Covered all sql related to questions.
